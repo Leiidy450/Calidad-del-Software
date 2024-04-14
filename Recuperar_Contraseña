@@ -1,0 +1,21 @@
+import http from 'k6/http';
+import { check } from 'k6';
+
+export default function () {
+    // Definir los datos de la solicitud de recuperación de contraseña
+    const email = 'masielgonzalez68@gmail.com';
+    const url = 'https://www.linkedin.com/checkpoint/lg/sign-in-another-account';
+
+    // Definir los datos de la solicitud de recuperación de contraseña
+    const payload = {
+        email: email
+    };
+
+    // Realizar la solicitud de recuperación de contraseña
+    const response = http.post(url, payload);
+
+    // Verificar si la solicitud fue exitosa
+    check(response, {
+        'Recuperación de contraseña exitosa': (res) => res.status === 200
+    });
+}
