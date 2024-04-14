@@ -1,0 +1,19 @@
+import http from 'k6/http';
+import { check } from 'k6';
+
+export default function () {
+    // Definir los datos de la solicitud de inicio de sesión con Google
+    const googleLoginUrl = 'https://www.linkedin.com/checkpoint/lg/sign-in-another-account';
+    const googleLoginPayload = {
+        email: 'masielgonzalez68@gmail.com',
+        password: 'Masiel2019ea1.123'
+    };
+
+    // Realizar la solicitud de inicio de sesión con Google
+    const googleLoginResponse = http.post(googleLoginUrl, googleLoginPayload);
+
+    // Verificar si la solicitud fue exitosa
+    check(googleLoginResponse, {
+        'Inicio de sesión con Google exitoso': (res) => res.status === 200
+    });
+}
